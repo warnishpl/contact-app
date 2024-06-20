@@ -36,7 +36,8 @@ export const AddContactBox = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 80vw;
-	height: 80vh;
+	min-height: 80vh;
+	gap: 20px;
 	padding: 20px;
 	border-radius: 20px;
 	background-color: ${({ theme }) => theme.colors.itemBackground};
@@ -49,7 +50,6 @@ export const AddContactBox = styled.div`
 		align-self: flex-start;
 		width: 400px;
 		min-height: 370px;
-		height: 50vh;
 	`}
 `;
 export const IconWrapper = styled.div`
@@ -99,9 +99,11 @@ export const ImageWrapper = styled.div`
 	position: relative;
 	overflow: hidden;
 	border-radius: 50%;
+	background: red;
 `;
 export const ImagePreview = styled.div`
 	position: absolute;
+
 	width: 100px;
 	height: 100px;
 	background-color: rgba(0, 0, 0, 0.4);

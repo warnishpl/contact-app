@@ -28,7 +28,7 @@ import { setLocalStorgeValue } from '../../utils/functions/localStorageFunctions
 import { sizes } from '../../styles/media.js';
 import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys.js';
 import { ContactsListContext } from '../../context/contactsListContext.js';
-import { AddContactButtonContext } from '../../context/isAddContactButtonClicked.js';
+import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
 
 export function AddContactForm() {
 	const inputRef = useRef(null);
@@ -42,7 +42,7 @@ export function AddContactForm() {
 	const [phoneError, setPhoneError] = useState(false);
 
 	const ContactsListContextValue = useContext(ContactsListContext);
-	const AddContactButtonContextValue = useContext(AddContactButtonContext);
+	const { handleIsAddContactFormShown } = useContext(IsAddContactFormShown);
 	// TODO: dane z forumlarza wyciągać po kliknięciu przycisku
 
 	const handleFileChange = useCallback(
@@ -86,8 +86,8 @@ export function AddContactForm() {
 		setImageSrc(null);
 		setNameError(false);
 		setPhoneError(false);
-		if (window.innerWidth <= sizes.lg) AddContactButtonContextValue.handleAddContactButtonClick(false);
-	}, [AddContactButtonContextValue]);
+		if (window.innerWidth <= sizes.lg) handleIsAddContactFormShown(false);
+	}, [handleIsAddContactFormShown]);
 
 	const addNewContact = useCallback(() => {
 		ContactsListContextValue.setContactsList((prev) => {
@@ -111,7 +111,7 @@ export function AddContactForm() {
 		phoneValue,
 		prefixValue,
 		resetValues,
-		ContactsListContextValue
+		ContactsListContextValue,
 	]);
 
 	const validateForm = useCallback(() => {
@@ -133,12 +133,12 @@ export function AddContactForm() {
 
 	return (
 		<>
-			<Background onClick={AddContactButtonContextValue.handleAddContactButtonClick}></Background>
+			<Background onClick={handleIsAddContactFormShown}></Background>
 			<AddContactFormWrapper>
 				<AddContactBox>
 					<Header>
 						<IconWrapper>
-							<BackIcon onClick={AddContactButtonContextValue.handleAddContactButtonClick} />
+							<BackIcon onClick={handleIsAddContactFormShown} />
 						</IconWrapper>
 						<p>Dodaj kontakt</p>
 					</Header>

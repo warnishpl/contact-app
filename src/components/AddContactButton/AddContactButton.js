@@ -1,18 +1,19 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import { ReactComponent as AddIcon } from '../../assets/add-icon.svg';
-import { Wrapper, Button, P } from './AddContactButton.styles.js';
-import { AddContactButtonContext } from '../../context/isAddContactButtonClicked.js';
+import { Wrapper, Button, ParagraphStyled } from './AddContactButton.styles.js';
+import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
 
-export function AddContactButton() {
-	const AddContactButtonContextValue = useContext(AddContactButtonContext);
+export const AddContactButton = memo(function AddContactButton(props) {
+	const {handleIsAddContactFormShown} = useContext(IsAddContactFormShown);
+
 	return (
 		<Wrapper>
 			<Button
-				onClick={AddContactButtonContextValue.handleAddContactButtonClick}
+				onClick={handleIsAddContactFormShown}
 			>
 				<AddIcon />
-				<P>Dodaj kontakt</P>
+				<ParagraphStyled>Dodaj kontakt</ParagraphStyled>
 			</Button>
 		</Wrapper>
 	);
-}
+});

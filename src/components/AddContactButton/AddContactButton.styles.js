@@ -32,7 +32,7 @@ export const Button = styled.button`
 		}
 	`}
 `;
-export const P = styled.p`
+export const ParagraphStyled = styled.p`
 	display: none;
 	${media.lg`
 		display: flex;

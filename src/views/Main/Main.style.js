@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import media from './styles/media';
+import media from '../../styles/media';
 
-export const Main = styled.main`
+export const MainBox = styled.main`
 max-height: 100vh;
 	display: grid;
 	grid-template-columns: [margin-left] 30px [content-start] 1fr [content-mid] auto [content-end] 10px[scroll-end] 30px [margin-right];
