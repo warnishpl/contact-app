@@ -38,10 +38,10 @@ export function useAddContactForm() {
 				const reader = new FileReader();
 
 				reader.onload = (e) => {
-					setImageSrc(e.target.result); // Ustaw stan z wczytanymi danymi pliku
+					setImageSrc(e.target.result);
 				};
 
-				reader.readAsDataURL(file); // Wczytaj plik jako URL
+				reader.readAsDataURL(file); 
 			}
 		},
 		[setImageSrc]
@@ -84,7 +84,7 @@ export function useAddContactForm() {
 				...prev,
 			];
 			setLocalStorgeValue(LOCALSTORAGE_KEYS.CONTACTS, updatedContactsList);
-			resetValues(); //reset
+			resetValues(); 
 			return updatedContactsList;
 		});
 	}, [

@@ -13,7 +13,7 @@ export function SearchInput() {
 		<InputWrapper>
 			<Input
 				defaultValue={searchValue}
-				onChange={debouncedSetSearchValue} //debounce nie dziala?
+				onChange={debouncedSetSearchValue} 
 				type='search'
 				placeholder='Wyszukaj kontakt'
 			/>

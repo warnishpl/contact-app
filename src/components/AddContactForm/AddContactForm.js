@@ -23,9 +23,9 @@ import { ReactComponent as BackIcon } from '../../assets/arrow-left.svg';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CountryDropdownMenu } from '../CountryDropdownMenu/CountryDropdownMenu.js';
 import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
-import { useAddContactForm } from './useAddContactform.js';
+import { useAddContactForm } from './useAddContactForm.js'; 
 import { useContext } from 'react';
-
+ 
 export function AddContactForm() {
 	const { handleIsAddContactFormShown } = useContext(IsAddContactFormShown);
 	const {
@@ -50,7 +50,7 @@ export function AddContactForm() {
 		nameError,
 		phoneError,
 	} = useAddContactForm();
-	// TODO: dane z forumlarza wyciągać po kliknięciu przycisku
+
 
 	return (
 		<>
