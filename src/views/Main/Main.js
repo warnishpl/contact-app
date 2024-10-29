@@ -7,7 +7,6 @@ import { ContactItemsMap } from '../../components/ContactItemsMap/ContactItemsMa
 import { AddContactForm } from '../../components/AddContactForm/AddContactForm.js';
 import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
 import { SearchValueProvider } from '../../context/searchValueContext.js';
-import { AddContactFormProvider } from '../../context/AddContactFormContext.js';
 
 export function Main() {
 	const { isAddContactFormShown } = useContext(IsAddContactFormShown);
@@ -15,13 +14,11 @@ export function Main() {
 	return (
 		<MainBox>
 			<SearchValueProvider>
-				<AddContactFormProvider>
-					<SearchInput />
-					<AddContactButton />
-					<ContactsHeader />
-					<ContactItemsMap />
-					{isAddContactFormShown && <AddContactForm />}
-				</AddContactFormProvider>
+				<SearchInput />
+				<AddContactButton />
+				<ContactsHeader />
+				<ContactItemsMap />
+				{isAddContactFormShown && <AddContactForm />}
 			</SearchValueProvider>
 		</MainBox>
 	);

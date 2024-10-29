@@ -7,13 +7,13 @@ import { OwnThemeProvider } from './components/OwnThemeProider/OwnThemeProider.j
 function App() {
 	return (
 		<IsAscendingProvider>
-			<ContactsListProvider>
-				<IsAddContactFormShownProvider>
+			<IsAddContactFormShownProvider>
+				<ContactsListProvider>
 					<OwnThemeProvider>
 						<Main></Main>
 					</OwnThemeProvider>
-				</IsAddContactFormShownProvider>
-			</ContactsListProvider>
+				</ContactsListProvider>
+			</IsAddContactFormShownProvider>
 		</IsAscendingProvider>
 	);
 }

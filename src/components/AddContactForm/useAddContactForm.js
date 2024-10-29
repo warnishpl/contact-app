@@ -1,7 +1,6 @@
-import { useCallback, useContext, useRef } from 'react';
-import { AddContactFormContext } from '../../context/AddContactFormContext';
-import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys';
-import { setLocalStorgeValue } from '../../utils/functions/localStorageFunctions';
+import { useCallback, useContext, useRef, useState } from 'react';
+import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys.js';
+import { setLocalStorgeValue } from '../../utils/functions/localStorageFunctions.js';
 import defaultAvatar from '../../assets/default_avatar_black.jpg';
 import { sizes } from '../../styles/media.js';
 import { ContactsListContext } from '../../context/contactsListContext.js';
@@ -11,23 +10,26 @@ export function useAddContactForm() {
 	const inputRef = useRef(null);
 	const { setContactsList } = useContext(ContactsListContext);
 	const { handleIsAddContactFormShown } = useContext(IsAddContactFormShown);
-	const {
-		nameValue,
-		setNameValue,
-		phoneValue,
-		setPhoneValue,
-		prefixValue,
-		setPrefixValue,
-		phoneLengthValue,
-		setPhoneLengthValue,
-		imageSrc,
-		setImageSrc,
-		setNameError,
-		setPhoneError,
-		handlerNameValue,
-		handlerPhoneValue,
-		handlerDropdown,
-	} = useContext(AddContactFormContext);
+	const [nameValue, setNameValue] = useState('');
+	const [phoneValue, setPhoneValue] = useState('');
+	const [isDropdownShown, setIsDropdownShown] = useState(false);
+	const [prefixValue, setPrefixValue] = useState('+48');
+	const [phoneLengthValue, setPhoneLengthValue] = useState(9);
+	const [imageSrc, setImageSrc] = useState(null);
+	const [nameError, setNameError] = useState(false);
+	const [phoneError, setPhoneError] = useState(false);
+	const handlerNameValue = useCallback(
+		(event) => setNameValue(event.target.value),
+		[setNameValue]
+	);
+	const handlerPhoneValue = useCallback(
+		(event) => setPhoneValue(event.target.value),
+		[setPhoneValue]
+	);
+	const handlerDropdown = useCallback(
+		() => setIsDropdownShown((prev) => !prev),
+		[setIsDropdownShown]
+	);
 
 	const handleFileChange = useCallback(
 		(event) => {
@@ -69,6 +71,7 @@ export function useAddContactForm() {
 	]);
 
 	const addNewContact = useCallback(() => {
+		console.log('addNewContact');
 		setContactsList((prev) => {
 			const updatedContactsList = [
 				{
@@ -117,15 +120,27 @@ export function useAddContactForm() {
 		setPhoneError,
 	]);
 
-	return [
+	return {
 		handleFileChange,
 		handlerNameValue,
 		handlerPhoneValue,
 		handlerDropdown,
 		handleAddAvatarIconClick,
 		resetValues,
-		addNewContact,
 		validateForm,
 		inputRef,
-	];
+		nameValue,
+		phoneValue,
+		setPhoneValue,
+		isDropdownShown,
+		setIsDropdownShown,
+		prefixValue,
+		setPrefixValue,
+		phoneLengthValue,
+		setPhoneLengthValue,
+		imageSrc,
+		setImageSrc,
+		nameError,
+		phoneError,
+	};
 }

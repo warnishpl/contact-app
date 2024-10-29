@@ -3,7 +3,7 @@ import { ReactComponent as AddIcon } from '../../assets/add-icon.svg';
 import { Wrapper, Button, ParagraphStyled } from './AddContactButton.styles.js';
 import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
 
-export const AddContactButton = memo(function AddContactButton(props) {
+export const AddContactButton = memo(function AddContactButton() {
 	const {handleIsAddContactFormShown} = useContext(IsAddContactFormShown);
 
 	return (

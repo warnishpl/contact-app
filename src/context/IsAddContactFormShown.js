@@ -10,7 +10,7 @@ export const IsAddContactFormShownProvider = ({ children }) => {
 	const [isAddContactFormShown, setIsAddContactFormShown] = useState(false);
 
 	const handleIsAddContactFormShown = () => {
-		setIsAddContactFormShown(prev => !prev);
+		setIsAddContactFormShown((prev) => !prev);
 	};
 	return (
 		<IsAddContactFormShown.Provider
@@ -23,4 +23,4 @@ export const IsAddContactFormShownProvider = ({ children }) => {
 			{children}
 		</IsAddContactFormShown.Provider>
 	);
-}; 
+};
