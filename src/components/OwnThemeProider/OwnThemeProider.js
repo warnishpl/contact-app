@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys';
-import { getLocalStorageValue } from '../../utils/functions/localStorageFunctions';
-import { blueDark } from '../../styles/theme';
-import { ThemePicker } from '../ThemePicker/ThemePicker';
+import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys.js';
+import { getLocalStorageValue } from '../../utils/functions/localStorageFunctions.js';
+import { blueDark } from '../../styles/theme.js';
+import { ThemePicker } from '../ThemePicker/ThemePicker.js';
 import { SetGlobalStyle } from '../../styles/GlobalStyles.js';
 
 export const OwnThemeProvider = ({ children }) => {

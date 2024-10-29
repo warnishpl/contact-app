@@ -21,115 +21,39 @@ import {
 } from '../AddContactForm/AddContactForm.styles.js';
 import { ReactComponent as BackIcon } from '../../assets/arrow-left.svg';
 import { SaveButton } from '../SaveButton/SaveButton';
-import { useRef, useState, useCallback, useContext } from 'react';
 import { CountryDropdownMenu } from '../CountryDropdownMenu/CountryDropdownMenu.js';
-import defaultAvatar from '../../assets/default_avatar_black.jpg';
-import { setLocalStorgeValue } from '../../utils/functions/localStorageFunctions.js';
-import { sizes } from '../../styles/media.js';
-import { LOCALSTORAGE_KEYS } from '../../utils/constants/localStorageKeys.js';
-import { ContactsListContext } from '../../context/contactsListContext.js';
 import { IsAddContactFormShown } from '../../context/IsAddContactFormShown.js';
+import { AddContactFormContext } from '../../context/AddContactFormContext.js';
+import { useAddContactForm } from './useAddContactForm.js';
+import { useContext } from 'react';
 
 export function AddContactForm() {
-	const inputRef = useRef(null);
-	const [nameValue, setNameValue] = useState('');
-	const [phoneValue, setPhoneValue] = useState('');
-	const [isDropdownShown, setIsDropdownShown] = useState(false);
-	const [prefixValue, setPrefixValue] = useState('+48');
-	const [phoneLengthValue, setPhoneLengthValue] = useState(9);
-	const [imageSrc, setImageSrc] = useState(null);
-	const [nameError, setNameError] = useState(false);
-	const [phoneError, setPhoneError] = useState(false);
-
-	const ContactsListContextValue = useContext(ContactsListContext);
 	const { handleIsAddContactFormShown } = useContext(IsAddContactFormShown);
-	// TODO: dane z forumlarza wyciągać po kliknięciu przycisku
-
-	const handleFileChange = useCallback(
-		(event) => {
-			const file = event.target.files[0];
-			if (file) {
-				const reader = new FileReader();
-
-				reader.onload = (e) => {
-					setImageSrc(e.target.result); // Ustaw stan z wczytanymi danymi pliku
-				};
-
-				reader.readAsDataURL(file); // Wczytaj plik jako URL
-			}
-		},
-		[setImageSrc]
-	);
-
-	const handlerNameValue = useCallback(
-		(event) => setNameValue(event.target.value),
-		[]
-	);
-
-	const handlerPhoneValue = useCallback(
-		(event) => setPhoneValue(event.target.value),
-		[]
-	);
-	const handlerDropdown = useCallback(
-		() => setIsDropdownShown((prev) => !prev),
-		[]
-	);
-
-	const handleAddAvatarIconClick = useCallback(() => {
-		inputRef.current.click();
-	}, []);
-	const resetValues = useCallback(() => {
-		setNameValue('');
-		setPhoneValue('');
-		setPrefixValue('+48');
-		setPhoneLengthValue(9);
-		setImageSrc(null);
-		setNameError(false);
-		setPhoneError(false);
-		if (window.innerWidth <= sizes.lg) handleIsAddContactFormShown(false);
-	}, [handleIsAddContactFormShown]);
-
-	const addNewContact = useCallback(() => {
-		ContactsListContextValue.setContactsList((prev) => {
-			const updatedContactsList = [
-				{
-					id: crypto.randomUUID(),
-					name: nameValue,
-					prefix: prefixValue,
-					phone: phoneValue,
-					picture: imageSrc || defaultAvatar,
-				},
-				...prev,
-			];
-			setLocalStorgeValue(LOCALSTORAGE_KEYS.CONTACTS, updatedContactsList);
-			resetValues(); //reset
-			return updatedContactsList;
-		});
-	}, [
-		imageSrc,
+	const {
 		nameValue,
 		phoneValue,
+		setPhoneValue,
+		isDropdownShown,
+		setIsDropdownShown,
 		prefixValue,
-		resetValues,
-		ContactsListContextValue,
-	]);
-
-	const validateForm = useCallback(() => {
-		const reg = new RegExp(`^[0-9+]{${phoneLengthValue}}$`);
-		if (nameValue === '') {
-			setNameError(true);
-			setTimeout(() => {
-				setNameError(false);
-			}, 1000);
-			return;
-		} else if (!reg.test(phoneValue)) {
-			setPhoneError(true);
-			setTimeout(() => {
-				setPhoneError(false);
-			}, 1000);
-			return;
-		} else addNewContact();
-	}, [addNewContact, nameValue, phoneLengthValue, phoneValue]);
+		setPrefixValue,
+		phoneLengthValue,
+		setPhoneLengthValue,
+		imageSrc,
+		setImageSrc,
+		nameError,
+		phoneError,
+	} = useContext(AddContactFormContext);
+	const [
+		handleFileChange,
+		handlerNameValue,
+		handlerPhoneValue,
+		handlerDropdown,
+		handleAddAvatarIconClick,
+		validateForm,
+		inputRef,
+	] = useAddContactForm();
+	// TODO: dane z forumlarza wyciągać po kliknięciu przycisku
 
 	return (
 		<>

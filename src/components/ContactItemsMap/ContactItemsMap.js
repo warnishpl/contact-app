@@ -3,8 +3,10 @@ import { ContactItem } from '../ContactItem/ContactItem';
 import { ContactsWrapper } from './ContactItemsMap.styles.js';
 import { ContactsListContext } from '../../context/contactsListContext.js';
 import { isAscendingContext } from '../../context/isAscendingContext.js';
+import { SearchValueContext } from '../../context/searchValueContext.js';
 
-export function ContactItemsMap({ searchValue }) {
+export function ContactItemsMap() {
+	const { searchValue } = useContext(SearchValueContext);
 	const isAscendingContextValue = useContext(isAscendingContext);
 	const ContactsListContextValue = useContext(ContactsListContext);
 	const lowerCaseSearchValue = searchValue.toLowerCase();
