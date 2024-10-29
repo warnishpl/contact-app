@@ -13,3 +13,4 @@ https://contact-app-nine-liard.vercel.app/
 
 ## Authors
 - [@warnishpl](https://www.github.com/warnishpl)
+pod okiem szymonqqaz
